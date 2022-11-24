@@ -5,6 +5,15 @@ import { COLORS } from "../../constants";
 import Icon from "../Icon";
 import { getDisplayedValue } from "./Select.helpers";
 
+const NativeSelect = styled.select`
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+`;
+
 const Selector = styled.div`
   background-color: ${COLORS.transparentGray15};
   color: ${COLORS.gray700};
@@ -15,15 +24,10 @@ const Selector = styled.div`
   &:hover {
     color: black;
   }
-`;
 
-const NativeSelect = styled.select`
-  opacity: 0;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  ${NativeSelect}:focus + & {
+    outline: 5px auto -webkit-focus-ring-color;
+  }
 `;
 
 const Wrapper = styled.div`
