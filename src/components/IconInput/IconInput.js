@@ -11,25 +11,28 @@ const sizes = {
     "--borderwidth": "1px",
     "--lineheight": "16px",
     "--fontsize": "14px",
-    "--iconsize": "10px",
+    "--iconsize": "16px",
+    "--height": "24px",
   },
   large: {
     "--borderwidth": "2px",
     "--lineheight": "21px",
     "--fontsize": "18px",
-    "--iconsize": "16px",
+    "--iconsize": "24px",
+    "--height": "36px",
   },
 };
 
 const Input = styled.input`
   width: var(--width);
+  height: var(--height);
   border: none;
   border-bottom: var(--borderwidth) solid ${COLORS.black};
-  color: ${COLORS.gray700};
+  color: inherit;
   font-weight: 700;
   font-size: var(--fontsize);
   line-height: var(--lineheight);
-  padding-left: calc(var(--iconsize) * 1.5);
+  padding-left: var(--height);
 
   &::placeholder {
     color: ${COLORS.gray500};
@@ -37,15 +40,11 @@ const Input = styled.input`
     font-size: var(--fontsize);
     line-height: var(--lineheight);
   }
-
-  &:hover {
-    color: ${COLORS.black};
-  }
 `;
 
 const IconWrapper = styled.div`
   position: absolute;
-  top: 4px;
+  top: 0;
   bottom: 0;
   left: 0px;
   margin: auto;
@@ -54,22 +53,27 @@ const IconWrapper = styled.div`
   pointer-events: none;
 `;
 
-const Wrapper = styled.div`
+const Wrapper = styled.label`
   position: relative;
   width: max-content;
+  color: ${COLORS.gray700};
+
+  &:hover {
+    color: ${COLORS.black};
+  }
 `;
 
 const IconInput = ({ label, icon, width = 250, size, placeholder }) => {
   const styles = sizes[size];
   const iconSizes = {
-    small: "10",
-    large: "16",
+    small: "16",
+    large: "24",
   };
 
   return (
     <Wrapper>
       <VisuallyHidden>{label}</VisuallyHidden>
-      <IconWrapper>
+      <IconWrapper style={{ "--size": `${iconSizes[size]}px` }}>
         <Icon id={icon} size={iconSizes[size]} strokeWidth="1"></Icon>
       </IconWrapper>
       <Input
